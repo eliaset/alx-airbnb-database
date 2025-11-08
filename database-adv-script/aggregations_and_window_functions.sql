@@ -19,3 +19,12 @@ SELECT
 FROM properties p
 LEFT JOIN bookings b ON p.id = b.property_id
 GROUP BY p.id, p.title;
+
+SELECT 
+    p.id AS property_id,
+    p.title,
+    AVG(r.rating) AS avg_rating,
+    RANK() OVER (ORDER BY AVG(r.rating) DESC) AS rating_rank
+FROM properties p
+LEFT JOIN reviews r ON p.id = r.property_id
+GROUP BY p.id, p.title;
