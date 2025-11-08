@@ -31,3 +31,23 @@ INNER JOIN users u ON b.user_id = u.id
 INNER JOIN properties p ON b.property_id = p.id
 INNER JOIN payments pay ON pay.booking_id = b.id
 WHERE b.status = 'confirmed';
+
+--Example
+
+-- perfomance.sql
+SELECT
+    u.id AS user_id,
+    u.name AS user_name,
+    b.id AS booking_id,
+    b.start_date,
+    b.end_date,
+    p.id AS property_id,
+    p.title AS property_title,
+    pay.id AS payment_id,
+    pay.amount,
+    pay.status
+FROM Bookings b
+INNER JOIN Users u ON b.user_id = u.id
+INNER JOIN Properties p ON b.property_id = p.id
+LEFT JOIN Payments pay ON b.id = pay.booking_id
+WHERE b.start_date >= '2025-01-01' AND pay.status = 'completed';
