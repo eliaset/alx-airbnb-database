@@ -1,20 +1,10 @@
-# Partition Performance Report
-
-**Objective:**  
-Improve query speed on large Booking table using partitioning.
-
-**Implementation:**  
-- Partitioned `Booking` table by `start_date` (RANGE partition by YEAR).  
-- Created partitions for 2022, 2023, 2024, and future years.  
-- Query saved in `partitioning.sql`.
-
-**Before Partitioning:**  
-- Full table scan for date range queries.  
-- Execution time: ~1.2s for large datasets.
-
-**After Partitioning:**  
-- Query only scans relevant partitions.  
-- Execution time: ~180 ms.
-
-**Result:**  
-Good improvement in query performance for date-based filtering.
+CREATE TABLE Booking (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    property_id INT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    status VARCHAR(20),
+    CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES Users(id),
+    CONSTRAINT fk_property FOREIGN KEY(property_id) REFERENCES Properties(id)
+) PARTITION BY RANGE (start_date);
