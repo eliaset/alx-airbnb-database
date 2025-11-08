@@ -10,3 +10,9 @@ CREATE INDEX idx_bookings_status ON bookings (status);
 CREATE INDEX idx_properties_city ON properties (city);
 CREATE INDEX idx_properties_price ON properties (price);
 CREATE INDEX idx_properties_host_id ON properties (host_id);
+
+--You can test performance before and after adding indexes using:
+
+EXPLAIN ANALYZE
+SELECT * FROM bookings
+WHERE user_id = 10 AND status = 'confirmed';
