@@ -12,9 +12,10 @@ SELECT
     p.title,
     r.rating,
 FROM properties AS p
-LEFT JOIN reviews AS r ON p.id = r.property_id;
+LEFT JOIN reviews AS r ON p.id = r.property_id
+ORDER BY property_id ASC;
 
---Full Outer Join--
+--FULL OUTER JOIN--
 
 SELECT 
     u.name AS user_name,
